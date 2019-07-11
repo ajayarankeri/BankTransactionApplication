@@ -18,12 +18,21 @@ public class RegistrationController {
 	@Autowired
 	BankService BankService;
 	
+	/**
+	  * @desc This function will register user i.e. user will add in user table
+	  * @param We are passing request body as input to insert register details
+	*/	
 	@PostMapping("/user")
 	public void registerUser(@RequestBody UserRegister register) {	
 	   System.out.println("Registering.....");
 	   BankService.registerUser(register);	   
 	}
 	
+	/**
+	  * @desc This function will create an account with default balance with 10K and insert details in account table
+	  * @param String $username this will be username which is inserted in register
+	  * @param String $password this will be password which is inserted in register
+	*/	
 	@PostMapping("/creareAccount")
 	public void CreateAccount(@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password) {	
@@ -33,13 +42,6 @@ public class RegistrationController {
 	   account.setUserId(isUserExist.getUserId());
 	   System.out.println(">>>>"+isUserExist.getUserId());
 	   BankService.createNewAccount(account);
-	  
-		/*
-		 * Account
-		 * isAccountExist=(Account)BankService.checkAccountExists(isUserExist.getUserId(
-		 * )); if(isAccountExist!=null) { System.out.println("Account is created");
-		 * }else { BankService.createNewAccount(account); }
-		 */
 	   
 	}
 
